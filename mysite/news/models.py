@@ -10,6 +10,7 @@ class News(models.Model):
     updated_at = models.DateTimeField( auto_now = True, verbose_name = 'Updated At' )
     photo = models.ImageField( upload_to = 'photos/%Y/%m/%d/', blank = True, verbose_name = 'Photo')
     is_published = models.BooleanField( default = True, verbose_name = 'Is Published' )
+    category = models.ForeignKey('Category', on_delete = models.PROTECT, null = True, blank = True)
 
     def __str__(self):
         return self.title
@@ -18,3 +19,15 @@ class News(models.Model):
         verbose_name = 'News list'
         verbose_name_plural = 'News lists'
         ordering = ['-created_at']
+
+class Category(models.Model):
+
+    title = models.CharField( max_length = 150, verbose_name = 'Category Title', db_index = True )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+        ordering = ['title']
