@@ -1,0 +1,35 @@
+
+{% load news_tags %}
+
+{% get_list_news as news %}
+{% for item in news %}
+<div class="card mb-3 shadow-sm bg-secondary rounded" style = 'width: 500'>
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center">
+                {% if item.photo %}
+            <img src="{{item.photo.url}}" class="img-fluid rounded" alt="#" width = "450">
+                {% else %}
+            <img src = "https://picsum.photos/id/1060/350/300/?blur2", class="img-fluid rounded" width = "350">
+                {% endif %}
+        </div>
+        <div class="col-md-8 ">
+          <div class="card-body bg-dark">
+            <h5 class="card-title text-light">{{item.title}}</h5>
+            <div class="card-header text-white border-color-light">
+                Категория: {{item.category}}
+            </div>
+            <p class="card-text text-light">
+                <a class = 'text-light' style = 'color: inherit; text-decoration: none;'> 
+                    {{item.content | safe | linebreaks | truncatewords:50 }}
+                </a>
+            <div class = 'row d-flex justify-content-between m-3'>
+                <p class="card-text ">
+                    <small class="text-info">Last updated at: {{item.updated_at}}</small>
+                </p>
+                <a href=" {{ item.get_absolute_url }} " class="btn btn-primary ">Read more ...</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

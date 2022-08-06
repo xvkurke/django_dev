@@ -1,28 +1,28 @@
-{% extends 'base.html' %}
-
-{% block sidebar %}
-{% include 'inc/_sidebar.html' %}
-{% endblock %}
-
-{% block content %}
-<div class="card mb-3">
-    <div class="card-header">
-        Категория: {{news.category}}
-    </div>
-    <div class="card-body">
-        
-        <div class = "media">
-            {% if item.photo %}
-            <img src = "{{news.photo.url}}" alt = "", width = "350" class = "mr-3">
-            {% else %}
-            <img src = "https://picsum.photos/id/1060/350/300/?blur2", width = "350">
-            {% endif %}
-            <h5 class="card-title">{{news.title}}</h5>
-            <p class="card-text">{{news.content | safe | linebreaks }}</p>
+{% extends 'base.html' %} {% block sidebar %} {% include 'inc/_sidebar.html' %}
+{% endblock %} {% block content %}
+<div class="card mb-3 shadow-sm bg-secondary rounded" style = 'width: 500'>
+    <div class="row">
+        <div class="col-md-4 d-flex justify-content-center">
+                {% if news.photo %}
+            <img src="{{news.photo.url}}" class="img-fluid rounded" alt="#" width = "450">
+                {% else %}
+            <img src = "https://picsum.photos/id/1060/350/300/?blur2", class="img-fluid rounded" width = "350">
+                {% endif %}
         </div>
-    </div>
-    <div class="card-footer text-muted">
-        {{news.created_at|date:'Y-m-d H:i:s'}}
+        <div class="col-md-8 ">
+          <div class="card-body bg-dark">
+            <h5 class="card-title text-light">{{news.title}}</h5>
+            <div class="card-header text-white border-color-light">
+                Категория: {{news.category}}
+            </div>
+            <p class="card-text text-light">{{news.content | safe | linebreaks }}</p>
+            <div class = 'row d-flex justify-content-between m-3'>
+                <p class="card-text ">
+                    <small class="text-info">Last updated at: {{news.updated_at}}</small>
+                </p>
+            </div>
+          </div>
+        </div>
     </div>
 </div>
 {% endblock %}
